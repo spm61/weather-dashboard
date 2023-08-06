@@ -78,7 +78,7 @@ function currentWeather(city) {
 function fiveDayForecast(latitude, longitude) {
 
     //query the five day forecast
-    var futureURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "$&units=imperial&exclude=current,minutely,hourly,alerts&appid=" + apiKey;
+    var futureURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&units=imperial&exclude=current,minutely,hourly,alerts&appid=" + apiKey;
     console.log(futureURL);
 
     $.ajax({

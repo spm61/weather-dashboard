@@ -15,7 +15,7 @@ function currentWeather(city) {
         
         //store elements in variables for repeated use.
         var weatherContent = $("#weather-content");
-        var cityDetail = $("city-detail");
+        var cityDetail = $("#city-detail");
 
         weatherContent.css("display", "block");
         cityDetail.empty(); //clear out the details
@@ -47,8 +47,9 @@ function currentWeather(city) {
             url: uviQueryURL,
             method: "GET"
         }).then(function(response) {
-
+            console.log(response);
             var uvIndex = response.value;
+            console.log(uvIndex);
             var uvIndexEl = 
             $(`<p>UV Index: 
                     <span id="uv-index-color" class="px-2 py-2 rounded">${uvIndex}</span>
@@ -86,17 +87,17 @@ function fiveDayForecast(latitude, longitude) {
         method: "GET"
     }).then(function(response) {
         $("#five-day-forecast").empty(); //clear it out before we get a new one.
-        
+        console.log(response);
         for (let i = 1; i < 6; i++) {
             var cityDailyInfo = { //create an object to hold info about the city on each day
-                date: response.daily[i].dt,
-                icon: response.daily[i].weather[0].icon,
-                temp: response.daily[i].temp.day,
-                humidity: response.daily[i].humidity
+                date: response.list[i].main.dt,
+                icon: response.list[i].weather[0].icon,
+                temp: response.list[i].main.temp,
+                humidity: response.list[i].main.humidity
             };
 
             var currentDate = dayjs(cityDailyInfo.date).format("MM/DD/YYYY");
-            var iconURL = `<img src="https://openweathermap.org/img/w/${cityDailyInfo.icon}.png" alt="${response.daily[i].weather[0].main}" />`;
+            var iconURL = `<img src="https://openweathermap.org/img/w/${cityDailyInfo.icon}.png" alt="${response.list[i].weather[0].main}" />`;
 
             //displays the weather for each day.  Contains icons for each of these
             var dailyCard = $(`
